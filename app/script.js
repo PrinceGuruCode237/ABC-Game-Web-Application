@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (spaceKeyBoard === " ") {
       startGameEl.classList.add("hide");
       gameAreaEl.classList.add("show");
+      body.classList.add("changeLevel");
       body.classList.add("levelOne");
     }
   });
