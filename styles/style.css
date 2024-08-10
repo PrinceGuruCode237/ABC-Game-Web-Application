@@ -238,6 +238,40 @@ body.changeLevel header {
   box-shadow: 0 1px 9px 0 rgb(31, 31, 31, 0.4);
 }
 
+.sounds {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sounds svg {
+  position: absolute;
+}
+
+.sounds #no-sound {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.sounds #sound {
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.sounds svg path {
+  fill: var(--white-3);
+}
+
+.sounds.mute #no-sound {
+  opacity: 1;
+  visibility: visible;
+}
+.sounds.mute #sound {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .boarding {
   display: flex;
   /* align-items: center; */
@@ -261,6 +295,9 @@ body.changeLevel header {
   justify-content: center;
   align-items: center;
   gap: 8px;
+  /* background-color: red; */
+  width: 150px;
+  max-width: 200px;
 }
 
 .scores p {
@@ -270,8 +307,18 @@ body.changeLevel header {
 }
 
 .scores h2 {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  overflow: hidden;
+  width: 60px;
+  background-color: var(--color-orange-100);
 }
 
 .board {
@@ -709,4 +756,49 @@ body.changeLevel header {
 .showcase.showlevel {
   opacity: 1;
   visibility: visible;
+}
+
+.letter.pop {
+  animation: popFade 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.game.wrong {
+  animation: incorrect 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes incorrect {
+  0% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes popFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
