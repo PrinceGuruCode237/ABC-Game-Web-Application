@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let gameStarted = false;
   let score = 0;
   let isGameOver = false;
-  let generationSpeed = 2000;
+  let generationSpeed = 4000;
   const generatedLetters = [];
   let frameAnimationIds = {};
   let frameId;
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startGameEl.classList.add("hide");
     gameAreaEl.classList.add("show");
     body.classList.add("changeLevel");
-    body.classList.add("levelOne");
+    body.classList.add("levelFourteen");
   }
   let pauseIsPress = false;
   const pauseBtn = document.getElementById("pause");
@@ -277,16 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Function to change the level
-  function changeLevel() {
-    if (score === 10) {
-      body.classList.remove("levelTwo");
-      body.classList.add("levelThree");
-      currentLevel = 1;
-      setTimeout(() => {
-        currentLevel = 0;
-      }, 30000);
-    }
-  }
+  function changeLevel() {}
 
   // function to show the level
   function showlevel(level) {
@@ -483,10 +474,11 @@ document.addEventListener("DOMContentLoaded", () => {
       startGame();
       startGenerate();
       showlevel("Level 1");
-    } else if (spaceBar === " " && gameStarted) {
-      pauseIsPress = true;
-      stopGame();
-      console.log("Bar press for pausing");
+    } else if (spaceBar === " ") {
+      if (gameStarted) {
+        pauseIsPress = true;
+        stopGame();
+      }
     }
   });
 });

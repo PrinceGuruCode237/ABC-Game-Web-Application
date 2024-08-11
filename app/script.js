@@ -7,13 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeMenuEl = document.getElementById("close");
   const soundControlEl = document.querySelector(".sounds");
   const resetBtn = document.getElementById("reset");
+  const backdrop = document.querySelector(".backdrop");
   const pauseBtn = document.getElementById("pause");
+  const gameOverEl = document.querySelector(".game-over");
   // Adding a tick on the suboptions (uppercase, lowercase, numbers and symbols)
   options.forEach((option) => {
     option.addEventListener("click", () => option.classList.toggle("checked"));
   });
 
-  console.log(menuBarEl);
   hamburgerMenuEl.addEventListener("click", () => {
     menuBarEl.classList.add("show");
   });

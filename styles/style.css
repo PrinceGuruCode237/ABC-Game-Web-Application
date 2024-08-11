@@ -13,14 +13,48 @@ html {
 /* Setting variables  */
 
 :root {
-  /* Colors  */
+  /* Colors interace */
 
-  --primary-bg-color: hsl(202, 32%, 15%);
+  --primary-bg-color: #1a2a32;
   --white-3: hsl(0, 0%, 87%);
   --pure-white: hsl(0, 0%, 100%);
   --color-orange-100: hsl(33, 92%, 57%);
   --color-red-100: hsl(3, 58%, 51%);
   --color-red-50: hsl(3, 49%, 49%);
+
+  /* Background changing color */
+
+  --color-levelOne: var(--primary-bg-color);
+  --lg-levelOne: #8344f6;
+  --color-levelTwo: #1a2130;
+  --lg-levelTwo: #fff;
+  --color-levelThree: #ff9671;
+  --lg-levelThree: #ca413a;
+  --color-levelFour: #4f1787;
+  --lg-levelFour: #ca413a;
+  --color-levelFive: #000;
+  --lg-levelFive: #fff;
+  --color-levelSix: #1a2a33;
+  --lg-levelSix: #8344f6;
+  --color-levelSeven: #787880;
+  --lg-levelSeven: var(--lg-levelSeven);
+  --color-levelHeight: #31111d;
+  --lg-levelHeight: var(--lg-levelSeven);
+  --color-levelNine: #4b4453;
+  --lg-levelNine: var(--lg-levelSeven);
+  --color-levelTen: #ae5d00;
+  --lg-levelTen: #73bd3b;
+
+  --color-levelEleven: #a02334;
+  --lg-levelEleven: #ca413a;
+  --color-levelTwelve: #4d8076;
+  --lg-levelTwelve: var(--pure-white);
+  --color-levelThirteen: #4e8397;
+  --lg-levelThirteen: var(--pure-white);
+  --color-levelFourteen: #008bc9;
+  --lg-levelFourteen: var(--pure-white);
+  --color-levelFifteen: #005b44;
+  --lg-levelFifteen: var(--lg-levelTen);
 
   /* Effects    */
 
@@ -193,38 +227,115 @@ body.changeLevel {
 }
 
 .changeLevel.levelOne::before {
-  background-color: rgba(130, 68, 246, 0.3);
+  background-color: var(--lg-levelOne);
 }
 
 body.levelTwo {
-  background-color: #1a2130;
+  background-color: var(--color-levelTwo);
 }
 .changeLevel.levelTwo::before {
-  background-color: rgba(255, 255, 255, 0.39);
+  background-color: var(--lg-levelTwo);
 }
 
 body.levelThree {
-  background-color: rgb(0, 91, 68);
+  background-color: var(--color-levelThree);
+}
+
+body.levelThree .showcase,
+body.levelFour .showcase {
+  color: var(--white-3);
 }
 .changeLevel.levelThree::before {
-  background-color: rgba(115, 189, 59, 0.9);
+  background-color: var(--lg-levelThree);
 }
 
 .changeLevel.levelFour {
-  background-color: #ff9671;
+  background-color: var(--lg-levelFour);
 }
 
 .changeLevel.levelFour:before {
-  background-color: #ca413a;
+  background-color: var(--lg-levelFour);
+}
+
+.changeLevel.levelFour .game {
+  border-bottom-color: var(--color-orange-100);
 }
 
 .changeLevel.levelFive {
-  background-color: #a02334;
+  background-color: var(--color-levelFive);
 }
 
 .changeLevel.levelFive::before {
-  background-color: #ca413a;
+  background-color: var(--lg-levelFive);
 }
+
+.changeLevel.levelSix {
+  background-color: var(--color-levelSix);
+}
+.changeLevel.levelSix::before {
+  background-color: var(--lg-levelSix);
+}
+
+.changeLevel.levelSeven {
+  background-color: var(--color-levelSeven);
+}
+.changeLevel.leveSeven::before {
+  background-color: var(--lg-levelSeven);
+}
+.changeLevel.levelHeight {
+  background-color: var(--color-levelHeight);
+}
+.changeLevel.leveSeven::before {
+  background-color: var(--lg-levelHeight);
+}
+
+.changeLevel.levelNine {
+  background-color: var(--color-levelNine);
+}
+.changeLevel.levelNine::before {
+  background-color: var(--lg-levelNine);
+}
+
+.changeLevel.levelTen {
+  background-color: var(--color-levelTen);
+}
+.changeLevel.levelTen::before {
+  background-color: var(--lg-levelTen);
+}
+
+.changeLevel.levelEleven {
+  background-color: var(--color-levelEleven);
+}
+.changeLevel.levelTen::before {
+  background-color: var(--lg-levelEleven);
+}
+
+.changeLevel.levelTwelve {
+  background-color: var(--color-levelTwelve);
+}
+.changeLevel.levelTwelve::before {
+  background-color: var(--lg-levelTwelve);
+}
+
+.changeLevel.levelFourteen {
+  background-color: var(--color-levelFourteen);
+}
+.changeLevel.levelFourteen::before {
+  background-color: var(--lg-levelFourteen);
+}
+
+.changeLevel.levelFifteen {
+  background-color: var(--color-levelFifteen);
+}
+.changeLevel.levelFifteen::before {
+  background-color: var(--lg-levelFifteen);
+}
+
+.changeLevel.levelSix .menu-bar .content,
+.changeLevel.levelSix .menu-bar .menu.hasSubmenu.subright .submenu {
+  background-color: #4b4453;
+}
+
 /* ------------------- Styling the Header (START) ------------------  */
 
 body.changeLevel header {
@@ -708,6 +819,7 @@ body.changeLevel header {
   border-bottom: 20px solid var(--color-red-50);
   border-radius: 16px;
   position: relative;
+  transition: all 0.5s ease;
   /* overflow: hidden; */
 }
 
@@ -860,4 +972,90 @@ body.changeLevel header {
     opacity: 0;
     display: none;
   }
+}
+
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 24px;
+  text-align: center;
+  width: 500px;
+  border-radius: 16px;
+  z-index: 200;
+  background-color: var(--primary-bg-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out,
+    visibility 0.5s ease-in-out;
+  top: 200%;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.297);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.game-over h1 {
+  background-color: hsla(33, 92%, 57%, 0.84);
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  color: var(--pure-white);
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  left: 50%;
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+  height: 70px;
+  display: flex;
+  padding: 24px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-over .space {
+  width: 100%;
+}
+
+.game-over h3 {
+  font-size: 44px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  color: var(--pure-white);
+  color: var(--color-red-100);
+}
+
+.game-over .final-score {
+  color: var(--white-3);
+  font-size: 18px;
+}
+
+.game-over #overall {
+  font-size: 20px;
+  font-weight: 700;
+  color: #73bd3b;
+}
+
+.game-over.show {
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+}
+
+.backdrop.show {
+  opacity: 1;
+  visibility: visible;
 }
