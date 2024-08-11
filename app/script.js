@@ -34,4 +34,39 @@ document.addEventListener("DOMContentLoaded", () => {
   soundControlEl.addEventListener("click", () =>
     soundControlEl.classList.toggle("mute")
   );
+
+  const Options = [
+    { lowercase: String.fromCharCode(97 + Math.floor(Math.random() * 26)) },
+    { uppercase: String.fromCharCode(65 + Math.floor(Math.random() * 26)) },
+    { numbers: String.fromCharCode(48 + Math.floor(Math.random() * 10)) },
+    {
+      symbols: "!@#$%^&*()_+-=[]{}|;':\",./?".charAt(
+        Math.floor(Math.random() * 21)
+      ),
+    },
+  ];
+
+  function getRandomCharacter(level) {
+    const availableOptions = Options.slice(0, level + 1); // Select options based on level
+    const randomIndex = Math.floor(Math.random() * availableOptions.length);
+    const selectedOption = availableOptions[randomIndex];
+
+    // Choose a random property from the selected option
+    const keys = Object.keys(selectedOption);
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+
+    return selectedOption[randomKey];
+  }
+
+  // Example usage:
+  let intervalId;
+  const level = 0; // Include lowercase and uppercase characters
+  function Start() {
+    intervalId = setInterval(() => {
+      const randomChar = getRandomCharacter(level);
+      // console.log(randomChar);
+    }, 1000);
+  }
+
+  Start();
 });

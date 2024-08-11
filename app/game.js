@@ -192,10 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   let gameStarted = false;
   let score = 0;
-  let generationSpeed = 1000;
+  let isGameOver = false;
+  let generationSpeed = 2000;
   const generatedLetters = [];
   let frameAnimationIds = {};
   let frameId;
+  let currentLevel = 0;
   const backgroundColor = [
     "#A02334",
     "#8344F6",
@@ -215,14 +217,29 @@ document.addEventListener("DOMContentLoaded", () => {
     "#F69A2B",
   ];
 
-  let isGameOver = false;
+  let characterCase = {
+    index: 0,
+    option: "lowercase",
+  };
 
+  const options = [
+    { lowercase: String.fromCharCode(97 + Math.floor(Math.random() * 26)) },
+    { uppercase: String.fromCharCode(65 + Math.floor(Math.random() * 26)) },
+    { numbers: String.fromCharCode(48 + Math.floor(Math.random() * 10)) },
+    {
+      symbols: "!@#$%^&*()_+-=[]{}|;':\",./?".charAt(
+        Math.floor(Math.random() * 21)
+      ),
+    },
+  ];
+
+  // console.log(options[0].lowercase);
   // Starting the game by hiding the start menu
   function startGame() {
     startGameEl.classList.add("hide");
     gameAreaEl.classList.add("show");
     body.classList.add("changeLevel");
-    body.classList.add("levelTwo");
+    body.classList.add("levelOne");
   }
   let pauseIsPress = false;
   const pauseBtn = document.getElementById("pause");
@@ -255,14 +272,49 @@ document.addEventListener("DOMContentLoaded", () => {
     if (score <= 0) {
       score = 0;
     }
+
     scoreEl.innerText = formatScore(score);
   }
 
-  function generateLetter() {
+  // Function to change the level
+  function changeLevel() {
+    if (score === 10) {
+      body.classList.remove("levelTwo");
+      body.classList.add("levelThree");
+      currentLevel = 1;
+      setTimeout(() => {
+        currentLevel = 0;
+      }, 30000);
+    }
+  }
+
+  // function to show the level
+  function showlevel(level) {
+    const showcase = document.querySelector(".showcase");
+    showcase.classList.add("showlevel");
+    showcase.innerText = level;
+    setTimeout(() => {
+      showcase.classList.remove("showlevel");
+    }, 2000);
+  }
+  function generateLetter(level) {
     if (isGameOver || pauseIsPress) return;
-    const randomLetter = String.fromCharCode(
-      97 + Math.floor(Math.random() * 26)
-    );
+    const options = [
+      { lowercase: String.fromCharCode(97 + Math.floor(Math.random() * 26)) },
+      { uppercase: String.fromCharCode(65 + Math.floor(Math.random() * 26)) },
+      { numbers: String.fromCharCode(48 + Math.floor(Math.random() * 10)) },
+      {
+        symbols: "!@#$%^&*()_+-=[]{}|;':\",./?".charAt(
+          Math.floor(Math.random() * 21)
+        ),
+      },
+    ];
+    const availOptions = options.slice(0, level + 1);
+    const randomIndexChoice = Math.floor(Math.random() * availOptions.length);
+    const selecteOption = availOptions[randomIndexChoice];
+    const keyList = Object.keys(selecteOption);
+    const randonK = keyList[Math.floor(Math.random() * keyList.length)];
+    const randomLetter = selecteOption[randonK];
     const randomColorIndex = Math.floor(Math.random() * backgroundColor.length);
     const letterEl = document.createElement("div");
     letterEl.classList.add("letter");
@@ -284,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const letterObject = {
         letter: randomLetter,
         letterEl,
-        velocity: 190,
+        velocity: 20,
       };
       generatedLetters.push(letterObject);
       GameArea.appendChild(letterEl);
@@ -297,19 +349,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function checkLetter(userInput) {
     // if (pauseIsPress || isGameOver) return;
     let isCorrect = false;
+    let index;
     for (let i = 0; i < generatedLetters.length; i++) {
       if (userInput === generatedLetters[i].letter) {
         let letterEl = generatedLetters[i].letterEl;
+        index = i;
         letterEl.classList.add("pop");
         generatedLetters.splice(i, 1);
-        // letterEl.remove();
-        GameArea.removeChild(letterEl);
+        setTimeout(() => {
+          GameArea.removeChild(letterEl);
+        }, 500);
         isCorrect = true;
         break;
       }
     }
 
     if (isCorrect) {
+      console.log(userInput, index);
       score++;
       console.log("Got it!");
     } else {
@@ -348,7 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
       topPosition += (letterObj.velocity * deltaTime) / 1000;
       letter.style.top = `${topPosition}px`;
       remainingDistance = effectiveHeight - topPosition - letter.clientHeight;
-      console.log(letter.innerText, remainingDistance, topPosition);
+      // console.log(letter.innerText, remainingDistance, topPosition);
       if (remainingDistance < -errorTolerance) {
         if (GameArea.contains(letter)) {
           isGameOver = true;
@@ -394,7 +450,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startGenerate() {
-    const start = setInterval(generateLetter, generationSpeed);
+    const start = setInterval(() => {
+      generateLetter(currentLevel);
+    }, generationSpeed);
     return start;
   }
 
@@ -424,6 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gameStarted = true;
       startGame();
       startGenerate();
+      showlevel("Level 1");
     } else if (spaceBar === " " && gameStarted) {
       pauseIsPress = true;
       stopGame();

@@ -38,7 +38,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* transition: background 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55); */
+  transition: background 0.2s ease-in;
 }
 
 .container {
@@ -504,22 +504,33 @@ body.changeLevel header {
   top: 0;
   /* display: flex;
   visibility: hidden; */
-  transform: translateX(-2000px);
-  transition: transform 0.1s ease-in;
+  transform: translateX(-100%);
+  visibility: hidden;
+  opacity: 0;
+  /* transition: opacity 0.3s ease-in, transform 0.3s ease-in; */
+  transition: opacity 0.7s ease, transform 0.7s ease;
   z-index: 999;
 }
 
 .menu-bar.show {
   transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
 }
 
-.menu-bar.show::before {
+.menu-bar::before {
   position: absolute;
   content: "";
   right: 0;
   width: 70%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.257);
+  background-color: rgba(0, 0, 0, 0.126);
+  opacity: 0;
+}
+
+.menu-bar.show::before {
+  opacity: 1;
+  filter: blur(90px);
 }
 
 .content {
@@ -734,7 +745,8 @@ body.changeLevel header {
   color: hsl(261, 91%, 62%);
   /* box-shadow: inset 0 200px 7px 0 #a023347c; */
   /* text-shadow: 0 90px 0 #00000017, 0 -90px 0 #00000017; */
-  transition: opacity 0.2s cubic-bezier(0.1, 1.03, 0.91, -0.02);
+  transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    visibility 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   animation: text-move 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
   opacity: 0;
   visibility: hidden;
@@ -805,7 +817,7 @@ body.changeLevel header {
 }
 
 .letter.pop {
-  animation: popFade 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  animation: popFade 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .game.wrong {
@@ -836,15 +848,16 @@ body.changeLevel header {
 
 @keyframes popFade {
   0% {
-    transform: scale(1);
+    transform: scale(1.5);
     opacity: 1;
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1);
     opacity: 0.8;
   }
   100% {
     transform: scale(0);
     opacity: 0;
+    display: none;
   }
 }
