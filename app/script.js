@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBarEl = document.querySelector(".menu-bar");
   const closeMenuEl = document.getElementById("close");
   const soundControlEl = document.querySelector(".sounds");
-
+  const resetBtn = document.getElementById("reset");
+  const pauseBtn = document.getElementById("pause");
   // Adding a tick on the suboptions (uppercase, lowercase, numbers and symbols)
   options.forEach((option) => {
     option.addEventListener("click", () => option.classList.toggle("checked"));

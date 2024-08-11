@@ -458,21 +458,34 @@ body.changeLevel header {
 .buttons #pause:hover {
   background-color: hsl(33, 64%, 44%);
 }
-.buttons #pause:focus {
+.buttons #pause:active {
   background-color: hsl(33, 64%, 44%);
   outline: none;
-  /* transform: scale(0.97); */
-  transform: translateY(2px);
+  /* transform: translateY(2px); */
+  animation: click 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 
 .buttons #reset:hover {
   background-color: hsla(3, 58%, 51%, 0.829);
 }
 
-.buttons #reset:focus {
+.buttons #reset:active {
   /* transform: scale(0.97); */
+  animation: click 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   transform: translateY(2px);
   outline: none;
+}
+
+@keyframes click {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
 }
 
 .buttons #reset {
@@ -684,7 +697,7 @@ body.changeLevel header {
   border-bottom: 20px solid var(--color-red-50);
   border-radius: 16px;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .letter {
@@ -702,13 +715,13 @@ body.changeLevel header {
   color: var(--pure-white);
   font-weight: 800;
   font-size: 20px;
-  transition: all 0.4s ease;
+  transition: top 0.5s linear, left 0.5s linear, right 0.5s linear;
 
   /* box-shadow: 0 0px 3px 0 #8344f6; */
 }
 
 .letter.zigzag {
-  animation: zigzap 4s ease infinite;
+  animation: zigzap 10s ease infinite;
 }
 
 .showcase {
@@ -743,14 +756,47 @@ body.changeLevel header {
 }
 
 @keyframes zigzap {
-  0% {
-    transform: translateX(20px);
+  /* 0% {
+    transform: translateX(10px);
   }
   50% {
-    transform: translateX(-20px);
+    transform: translateX(-10px);
   }
   100% {
-    transform: translateX(20px);
+    transform: translateX(10px);
+  } */
+  0% {
+    transform: translateX(-15px);
+  }
+  10% {
+    transform: translateX(15px);
+  }
+  20% {
+    transform: translateX(-15px);
+  }
+  30% {
+    transform: translateX(15px);
+  }
+  40% {
+    transform: translateX(-15px);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+  60% {
+    transform: translateX(-15px);
+  }
+  70% {
+    transform: translateX(15px);
+  }
+  80% {
+    transform: translateX(-15px);
+  }
+  90% {
+    transform: translateX(15px);
+  }
+  100% {
+    transform: translateX(-15px);
   }
 }
 .showcase.showlevel {
@@ -759,11 +805,11 @@ body.changeLevel header {
 }
 
 .letter.pop {
-  animation: popFade 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  animation: popFade 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
 .game.wrong {
-  animation: incorrect 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation: incorrect 0.1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 @keyframes incorrect {
